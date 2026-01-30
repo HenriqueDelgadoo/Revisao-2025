@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Cruzamento 4.0</title>
+</head>
+<style>
+.luz-verde1{
+    width: 60px; height: 60px; margin: 10px auto; border-radius: 50%; opacity: 0.2;
+    background-color: green;
+}
+.luz-vermelho1{
+    width: 60px; height: 60px; margin: 10px auto; border-radius: 50%; opacity: 0.2;
+    background-color: red;
+}
+.luz-amarelo1{
+    width: 60px; height: 60px; margin: 10px auto; border-radius: 50%; opacity: 0.2;
+    background-color: yellow;
+}
+
+.retangulo1{
+    width: 100px;
+    height: 220px;
+    margin: 5px auto;
+    border-radius: 12px;
+    background-color: black;
+}
+.luz-verde2{
+    width: 60px; height: 60px; margin: 10px auto; border-radius: 50%; opacity: 0.2;
+    background-color: green;
+}
+.luz-vermelha2{
+    width: 60px; height: 60px; margin: 10px auto; border-radius: 50%; opacity: 0.2;
+    background-color: red;
+}
+.luz-amarela2{
+    width: 60px; height: 60px; margin: 10px auto; border-radius: 50%; opacity: 0.2;
+    background-color: yellow;
+}
+
+.retangulo2{
+    width: 100px;
+    height: 220px;
+    margin: 5px auto;
+    border-radius: 12px;
+    background-color: black;
+}
+.ativo{
+    opacity: 1;
+}
+
+</style>
+<body>
+    <h1>CRUZAMENTO 4.0</h1>
+    <div class="cruzamento">
+
+        <div class="retangulo1">
+            <div id="luz-verde1" class="luz-verde1"></div>
+            <div id="luz-amarelo1" class="luz-amarelo1"></div>
+            <div id="luz-vermelho1" class="luz-vermelho1"></div>
+        </div>
+        <div class="retangulo2">
+            <div  id ="luz-verde2"class="luz-verde2"></div>
+            <div id = "luz-amarela2"class="luz-amarela2"></div>
+            <div id = "luz-vermelha2"class="luz-vermelha2"></div>
+        </div>
+        <button onclick="cruzamento()">Rodar cruzamento</button>
+    </div>
+    <H2>Simuladores dos sensores</H2>
+
+<label for="chuva">Chuva forte:</label>
+<button onclick="chuvaForte()">Clique</button>
+<label for="transito">Transito intenso:</label>
+<button onclick="transitoIntenso()">Clique</button>
+<label for="sensores">Sensores falharam:</label>
+<button onclick="falhaSensores()">Clique</button>
+
+<script>
+let timer = null;
+
+const verde1 = document.getElementById("luz-verde1");
+const amarelo1 = document.getElementById("luz-amarelo1");
+const vermelho1 = document.getElementById("luz-vermelho1");
+
+const verde2 = document.getElementById("luz-verde2");
+const amarela2 = document.getElementById("luz-amarela2");
+const vermelha2 = document.getElementById("luz-vermelha2");
+
+function apagarTodas() {
+  verde1.style.opacity = "0.2";
+  amarelo1.style.opacity = "0.2";
+  vermelho1.style.opacity = "0.2";
+
+  verde2.style.opacity = "0.2";
+  amarela2.style.opacity = "0.2";
+  vermelha2.style.opacity = "0.2";
+}
+
+function parar() {
+  clearTimeout(timer);
+}
+
+function cruzamento() {
+  parar();
+
+  function ciclo() {
+    apagarTodas();
+    verde1.style.opacity = "1";
+    vermelha2.style.opacity = "1";
+
+    timer = setTimeout(() => {
+      apagarTodas();
+      amarelo1.style.opacity = "1";
+      vermelha2.style.opacity = "1";
+
+      timer = setTimeout(() => {
+        apagarTodas();
+        vermelho1.style.opacity = "1";
+        verde2.style.opacity = "1";
+
+        timer = setTimeout(() => {
+          apagarTodas();
+          vermelho1.style.opacity = "1";
+          amarela2.style.opacity = "1";
+
+          timer = setTimeout(ciclo, 2000);
+        }, 3000);
+
+      }, 3000);
+
+    }, 3000);
+  }
+
+  ciclo();
+}
+function falhaSensores(){
+      parar();
+
+  function ciclo() {
+    apagarTodas();
+    amarelo1.style.opacity = "1";
+    amarela2.style.opacity = "1";
+
+    timer = setTimeout(() => {
+      apagarTodas();
+      timer = setTimeout(ciclo, 1000);
+    }, 1000);
+  }
+
+  ciclo();
+}
+
+function chuvaForte() {
+  parar();
+
+  function ciclo() {
+    apagarTodas();
+    verde1.style.opacity = "1";
+    vermelha2.style.opacity = "1";
+
+    timer = setTimeout(() => {
+      apagarTodas();
+      amarelo1.style.opacity = "1";
+      vermelha2.style.opacity = "1";
+
+      timer = setTimeout(() => {
+        apagarTodas();
+        vermelho1.style.opacity = "1";
+        verde2.style.opacity = "1";
+
+        timer = setTimeout(() => {
+          apagarTodas();
+          vermelho1.style.opacity = "1";
+          amarela2.style.opacity = "1";
+
+          timer = setTimeout(ciclo, 5000); 
+        }, 5000);
+
+      }, 5000);
+
+    }, 7000);
+  }
+
+  ciclo();
+}
+
+function transitoIntenso() {
+  parar();
+
+  function ciclo() {
+    apagarTodas();
+    verde1.style.opacity = "1";
+    vermelha2.style.opacity = "1";
+
+    timer = setTimeout(() => {
+      apagarTodas();
+      amarelo1.style.opacity = "1";
+      vermelha2.style.opacity = "1";
+
+      timer = setTimeout(() => {
+        apagarTodas();
+        vermelho1.style.opacity = "1";
+        verde2.style.opacity = "1";
+
+        timer = setTimeout(() => {
+          apagarTodas();
+          vermelho1.style.opacity = "1";
+          amarela2.style.opacity = "1";
+
+          timer = setTimeout(ciclo, 4000); // verde mais longo
+        }, 2000);
+
+      }, 2000);
+
+    }, 5000);
+  }
+
+  ciclo();
+}
+
+function resetar() {
+  parar();
+  apagarTodas();
+}
+
+</script>
+
+</body>
+</html>
